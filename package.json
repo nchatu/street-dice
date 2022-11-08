@@ -1,7 +1,7 @@
 {
   "name": "street_dice",
   "version": "0.1.0",
-  "homepage": "https://nchatu.github.io/street_dice",
+  "homepage": "https://nchatu.github.io/street-dice",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
