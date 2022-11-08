@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/street_dice/static/css/main.8cce084e.css",
+    "main.js": "/street_dice/static/js/main.29bcc805.js",
+    "static/js/787.0816ebb8.chunk.js": "/street_dice/static/js/787.0816ebb8.chunk.js",
+    "index.html": "/street_dice/index.html",
+    "main.8cce084e.css.map": "/street_dice/static/css/main.8cce084e.css.map",
+    "main.29bcc805.js.map": "/street_dice/static/js/main.29bcc805.js.map",
+    "787.0816ebb8.chunk.js.map": "/street_dice/static/js/787.0816ebb8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8cce084e.css",
+    "static/js/main.29bcc805.js"
+  ]
+}
