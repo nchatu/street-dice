@@ -11,6 +11,14 @@ function App() {
   const [gameWonByShooter, setGameWonByShooter] = useState(false)
   const [gameWonByOpponent, setGameWonByOpponent] = useState(false)
   const [point, setPoint] = useState()
+  const [players, setPlayers] = useState([
+    {id: 1, name: 'Nuwan', isShooter: true, isOpponent: false },
+    {id: 1, name: 'David', isShooter: false, isOpponent: true },
+    {id: 1, name: 'Sam', isShooter: false, isOpponent: false },
+    {id: 1, name: 'Ryan', isShooter: false, isOpponent: false },
+    {id: 1, name: 'James', isShooter: false, isOpponent: false },
+  ])
+  const [winner, setWinner] = useState(null)
 
   const getRandomNumber = () => Math.ceil(Math.random() * 6)
 
@@ -18,27 +26,44 @@ function App() {
     setDiceOneNumber(getRandomNumber())
     setDiceTwoNumber(getRandomNumber())
   }
+ 
+  const wonByShooter = () => {
+    setGameWonByShooter(true)
+    setGameWonByOpponent(false)
+    setWinner(getShooter())
+  }
+  const wonByOpponent = () => {
+    setGameWonByShooter(false)
+    setGameWonByOpponent(true)
+    setWinner(getOpponent())
+  }
+
+  const resetGame = () => {
+    setGameWonByShooter(false)
+    setGameWonByOpponent(false)
+    setWinner(null)
+  }
+
+  const getShooter = () => players.find(p => p.isShooter)
+
+  const getOpponent = () => players.find(p => p.isOpponent)
 
   useEffect(() => {
     setTotal(diceOneNumber + diceTwoNumber)
   }, [diceOneNumber, diceTwoNumber])
 
+
   useEffect(() => {
-    setGameWonByShooter(false)
-    setGameWonByOpponent(false)
+    resetGame()
     if(total){
       //setTotal(diceOneNumber + diceTwoNumber)
       if(point){
         if(total === point){
-          setGameWonByShooter(true)
-          setGameWonByOpponent(false)
-
+          wonByShooter()
           setPoint(null)
          
         }else if(total === 7){
-          setGameWonByShooter(false)
-          setGameWonByOpponent(true)
-
+          wonByOpponent()
           setPoint(null)
         }else{
           //roll again
@@ -46,14 +71,9 @@ function App() {
       }else{
        
         if(total === 7 || total === 11){
-          setGameWonByShooter(true)
-          setGameWonByOpponent(false)
-
-          
+          wonByShooter()
         }else if(total === 2 || total === 3 || total === 12){
-          setGameWonByShooter(false)
-          setGameWonByOpponent(true)
-          
+          wonByOpponent()
         }else{
           //set point
           setPoint(total)
@@ -80,6 +100,9 @@ function App() {
       <div className='grid-item result'>
         <div>Shooter Win? { gameWonByShooter && <span>Yes</span> }</div>
         <div>Opponent Win? { gameWonByOpponent && <span>Yes</span> }</div>
+        <div>Shooter: { getShooter().name }</div>
+        <div>Opponent: { getOpponent().name }</div>
+        <div>Winner: { winner?.name }</div>
       </div>
       <div className='grid-item btn-roll'><button onClick={rollDice}>Roll</button></div>
      
